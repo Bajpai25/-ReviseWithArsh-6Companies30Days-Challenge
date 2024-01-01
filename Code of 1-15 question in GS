@@ -1,0 +1,45 @@
+Code in C++
+
+class Solution {
+
+public:
+
+    int gcd(int a,int b){
+        if(b==0) return a;
+        else
+         return gcd(b,a%b);
+    }
+
+    long long lcm(long long a,long b){
+            long long lcm= (a*b)/gcd(a,b);
+            return lcm; 
+    }
+
+public:
+    int minimizeSet(int div1, int div2, int cnt1, int cnt2) {
+
+            // by using binary search we will solve the above question :
+            int s=1;
+            int e=INT_MAX;
+            int mid=s+(e-s)/2;
+            long long l_c_m=lcm(div1,div2);
+            int ans=-1;
+            while(s<=e){
+                mid=s+(e-s)/2;
+                int divby1=mid/div1;
+                int divby2=mid/div2;
+                int not_div_by1=mid-divby1;
+                int not_div_by2=mid-divby2;
+
+                // condition for finding out the highest number and also reducing the search space too.
+                if(cnt1+cnt2<=mid-mid/l_c_m && cnt1<=not_div_by1 && cnt2<=not_div_by2){
+                    ans=mid;
+                    e=mid-1;
+                }
+                else{
+                    s=mid+1;
+                }
+            }
+            return ans;
+    }
+};
