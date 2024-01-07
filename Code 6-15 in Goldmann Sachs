@@ -1,0 +1,28 @@
+Question :
+https://www.geeksforgeeks.org/problems/number-following-a-pattern3126/1
+
+Approach : Stack implementation alongwith string too.
+
+Code in C++
+class Solution{   
+public:
+    string printMinNumberForPattern(string s){
+        int n=s.length();
+        string ans;
+        stack<int>st;
+        for(int i=0;i<=n;i++){
+            //increasing order mein numbers push karenege 
+            st.push(i+1);
+            // now check whether i==n || I is encountered  then push te numbers in the ans string and then pop them 
+            if(i==n || s[i]=='I'){
+                while(!st.empty()){
+                    ans+=to_string(st.top());
+                    st.pop();
+                }
+                
+            }
+        }
+        return ans;
+    }
+};
+
